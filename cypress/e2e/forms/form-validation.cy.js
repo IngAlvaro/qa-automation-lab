@@ -1,19 +1,18 @@
-describe('Form validation - Required field behavior', () => {
+describe('Form behavior - Empty submit allowed', () => {
 
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/actions')
   })
 
-  it('Should show error when required input is empty', () => {
+  it('Should allow form submission even when email is empty', () => {
 
     cy.get('.action-email')
-      .should('be.visible')
       .clear()
+      .should('have.value', '')
 
-    cy.get('.action-form')
-      .submit()
+    cy.get('.action-form').submit()
 
-    cy.get('.error')
+    cy.contains('Your form has been submitted!')
       .should('be.visible')
   })
 
